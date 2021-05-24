@@ -29,7 +29,9 @@ jobs:
         with:
     # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.m2/repository
-          
+          key: ${{ runner.os }}-maven-${{ hashFiles(‘**/pom.xml’) }}
+          restore-keys: |
+              ${{ runner.os }}-maven-
       - name: Setup Java JDK
         uses: actions/setup-java@v2.1.0
         with:
@@ -56,6 +58,7 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: target/*.jar
   deploy:
+    needs: build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -68,7 +71,9 @@ jobs:
         with:
     # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.m2/repository
-          
+          key: ${{ runner.os }}-maven-${{ hashFiles(‘**/pom.xml’) }}
+          restore-keys: |
+              ${{ runner.os }}-maven-
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.9
         with:

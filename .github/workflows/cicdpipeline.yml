@@ -29,7 +29,7 @@ jobs:
         with:
     # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles(‘**/pom.xml’) }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
               ${{ runner.os }}-maven-
       - name: Setup Java JDK
@@ -46,8 +46,8 @@ jobs:
       - name: Artifact file name with commit hash
         run: |
           artifactName1=$(ls target/*.jar | head -1)
-          commitHash=$(git rev-parse –short “$GITHUB_SHA”)
-          artifactName2=$(ls target/*.jar | head -1 | sed “s/.jar/.$commitHash.jar/g”)
+          commitHash=$(git rev-parse –short "$GITHUB_SHA")
+          artifactName2=$(ls target/*.jar | head -1 | sed "s/.jar/.$commitHash.jar/g")
           mv $artifactName1 $artifactName2
           
       - name: Upload a Build Artifact
@@ -71,7 +71,7 @@ jobs:
         with:
     # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles(‘**/pom.xml’) }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
               ${{ runner.os }}-maven-
       - name: Download a Build Artifact

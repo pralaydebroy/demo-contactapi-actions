@@ -40,9 +40,48 @@ jobs:
       - name: maven-settings-xml-action
         uses: whelk-io/maven-settings-xml-action@v16
         with:
-         repositories: '[{ "id": "MuleRepository", "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/" }]'
-         servers: '[{ "id": "anypoint-exchange-v2", "username": "${{ secrets.ANYPOINT_USERNAME }}", "password": "${{ secrets.ANYPOINT_PASSWORD }}" },{"id": "MuleRepository", "username": "${{ secrets.ENT_ID }}", "password": "${{ secrets.ENT_PASSWORD }}" }]'
-
+         repositories: |
+                [
+                  {
+                    "id": "MuleRepository",
+                    "name": "MuleRepository",
+                    "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
+                    "releases": {
+                      "enabled": "true"
+                    },
+                    "snapshots": {
+                      "enabled": "true"
+                    }
+                  }
+                ]
+         servers: |
+                [
+                  {
+                    "id": "anypoint-exchange-v2",
+                    "username": "${{ secrets.ANYPOINT_USERNAME }}",
+                    "password": "${{ secrets.ANYPOINT_PASSWORD }}",
+                    "configuration": {
+                      "httpConfiguration": {
+                        "all": {
+                          "usePreemptive": "true"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "id": "MuleRepository",
+                    "username": "${{ secrets.ENT_ID }}",
+                    "password": "${{ secrets.ENT_PASSWORD }}",
+                    "configuration": {
+                      "httpConfiguration": {
+                        "all": {
+                          "usePreemptive": "true"
+                        }
+                      }
+                    }
+                  }
+                ]      
+        
       
       
       # Runs a single command using the runners shell

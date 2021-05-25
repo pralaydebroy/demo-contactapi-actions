@@ -37,7 +37,11 @@ jobs:
         with:
     # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
           java-version: 1.8   
-      
+      - name: maven-settings-xml-action
+        uses: whelk-io/maven-settings-xml-action@v16
+        with:
+         servers: '[{ "id": "anypoint-exchange-v2", "username": ${{ secrets.ANYPOINT_USERNAME }}, "password": ${{ secrets.ANYPOINT_PASSWORD }} }]'
+
       
       
       # Runs a single command using the runners shell

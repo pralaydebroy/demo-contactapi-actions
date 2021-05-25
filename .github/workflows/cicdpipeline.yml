@@ -45,7 +45,7 @@ jobs:
     # Source file
          source: settings.xml
     # Target file
-         target: ~/.m2/settings.xml
+         target: ~/.m2/
       
       
       # Runs a single command using the runners shell

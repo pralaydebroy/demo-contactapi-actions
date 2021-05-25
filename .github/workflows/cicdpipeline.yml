@@ -28,7 +28,7 @@ jobs:
         uses: actions/cache@v2.1.5
         with:
     # A list of files, directories, and wildcard patterns to cache and restore
-          path: ~/.m2/repository
+          path: /home/runner/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
               ${{ runner.os }}-maven-
@@ -76,7 +76,7 @@ jobs:
         uses: actions/cache@v2.1.5
         with:
     # A list of files, directories, and wildcard patterns to cache and restore
-          path: ~/.m2/repository
+          path: /home/runner/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
               ${{ runner.os }}-maven-
